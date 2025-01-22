@@ -32,7 +32,7 @@ function Resolve-Microsoft365LicenseGuid {
         }
     }
     ForEach ($guid in $licenseGuid) {
-        #No requirement for included service plans for this activity so they'r essentially discarded
+        #No requirement for included service plans for this activity so they're essentially discarded
         $license = $licenseFile -Match $guid | Select-Object -First 1
         [pscustomobject]@{
             ProductDisplayName = $license.'Product_Display_Name'
