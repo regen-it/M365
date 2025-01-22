@@ -62,6 +62,7 @@ function Get-LicensingIssueReport {
 #I would recommend using a certificate to authenticate the application you use to connect this and not lazily and insecurely put Client secrets into the script itself. I've just put this here for demonstration purposes
 #The below relies on the Import-Excel module - https://www.powershellgallery.com/packages/ImportExcel/7.8.5
 #And a registered app that can send mail as a user 
+#And I haven't built proper reporting/logging/error handling into the above function or the below so take that into consideration 
 
 $ApplicationClientId = "value"
 $ApplicationClientSecret = "value"
