@@ -9,7 +9,7 @@ function Get-LicensingIssueReport {
     .NOTES
         Author: Jethro Underwood - jethro@regenit.cloud
         Version: 1.0
-        Updated: 
+        Info: $licenseSku switch is not built out and only contains core licensing I was looking for at the time. Will eventually have this done more intelligently so it doesn't have to be manually maintained
     .EXAMPLE
     #>
     [CmdletBinding()]
