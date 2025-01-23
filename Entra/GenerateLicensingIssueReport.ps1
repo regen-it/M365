@@ -32,19 +32,12 @@ function Get-LicensingIssueReport {
                 ForEach ($licenseAssignment in $userObject.LicenseAssignmentStates | Where-Object -FilterScript { $_.State -match "Error" }) {
                     $licenseAssignmentGroupUri = 'https://graph.microsoft.com/v1.0/groups/' + "$($licenseAssignment.assignedByGroup)" + '?$select=DisplayName,id'
                     $licenseAssignmentGroupObject = Invoke-MgGraphRequest -Uri $licenseAssignmentGroupUri
-                    $licenseSku = $licenseAssignment.SkuId
-                    switch ($licenseSku) {
-                        '05e9a617-0261-4cee-bb44-138d3ef5d965' { $licenseFriendlyName = "M365 E3" }
-                        '66b55226-6b4f-492c-910c-a3b7a3c9d993' { $licenseFriendlyName = "M365 F3" }
-                        'a403ebcc-fae0-4ca2-8c8c-7a907fd6c235' { $licenseFriendlyName = "Microsoft Fabric (Free)" }
-                        '639dec6b-bb19-468b-871c-c5c441c4b0cb' { $licenseFriendlyName = "Copilot for Microsoft 365" }
-                        'c5928f49-12ba-48f7-ada3-0d743a3601d5' { $licenseFriendlyName = "Visio Plan 2" }
-                        Default { $licenseFriendlyName = $licenseSku }
-                    }
+                    #the below relies on https://github.com/regen-it/M365/blob/main/General/Resolve-Microsoft365LicenseGuid.ps1
+                    $licenseinfo = Resolve-Microsoft365LicenseGuid -LicenseGuid $licenseAssignment.SkuId -csvpath "INSERT CSV PATH"
                     [PSCustomObject]@{
                         UserPrincipalName      = $userObject.userPrincipalName
                         UserObjectId           = $failedUser
-                        License                = $licenseFriendlyName
+                        License                = $licenseinfo.ProductDisplayName
                         LicenseAssignedByGroup = $licenseAssignmentGroupObject.displayName
                         GroupId                = $licenseAssignmentGroupObject.id
                     }
