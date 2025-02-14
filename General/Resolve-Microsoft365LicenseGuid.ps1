@@ -3,7 +3,7 @@ function Resolve-Microsoft365LicenseGuid {
     .SYNOPSIS
         Resolves licensing GUIDs to human readable information
     .DESCRIPTION
-        Resolves a PowerShell or Graph API license GUID to humnan readable information from the Microsoft 365 "Product names and service plan identifiers for licensing" information
+        Resolves a PowerShell or Graph API license GUID to human readable information from the Microsoft 365 "Product names and service plan identifiers for licensing" information
     .PARAMETER param1
     .NOTES
         Author: Jethro Underwood - jethro.underwood@regenit.cloud
